@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>CHART PAGE</title>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+</head>
+<body style="background-color: #f0f1f9;">
+	<!-- Start Navbar -->
+	<!--<nav class="navbar navbar-light" style="background: linear-gradient(135deg, #71b7e6, #9b59b6);">-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background: linear-gradient(135deg, #71b7e6, #9b59b6);">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/loginHome">AMEZING SYSTEM PROJECT</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link"
+						 href="/loginUser/showNewLoginUserForm">ADD USER</a></li>
+						 
+					<li class="nav-item"><a class="nav-link"
+						 href="/loginUser">USER LIST</a></li>
+					
+					<li class="nav-item"><a class="nav-link"
+						 href="/login">LOG OUT</a></li>
+						 
+				</ul>
+							
+			</div>
+		</div>
+	</nav>
+ 	 
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+		<br><br><br>
+		<div style="width: 80%; margin: 0 auto;">
+        <canvas id="roleChart"></canvas>
+    </div>
+
+    <!-- Fetch data from the server -->
+    <script th:inline="javascript">
+    var userList = [[${userList}]]
+
+    var count_x=userList.map(x => x[0])
+    var count_y=userList.map(x => x[1]) 
+
+        // Create the chart
+        var ctx = document.getElementById('roleChart').getContext('2d');
+        var roleChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: count_x,
+                datasets: [{
+                    label: 'ROLE',
+                    data: count_y,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
